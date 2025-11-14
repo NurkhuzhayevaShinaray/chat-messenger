@@ -1,3 +1,8 @@
+package api;
+
+import Classes.*;
+
+
 public class ChatApi {
     private final ApiClient client;
 

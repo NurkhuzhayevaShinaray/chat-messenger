@@ -1,12 +1,18 @@
+package api;
+
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDateTime;
 
 public class ApiClient {
     private final String baseUrl;
-    private final Gson gson = new Gson();
-
+    private final Gson gson = new GsonBuilder()
+            .registerTypeAdapter(LocalDateTime.class, new utils.LocalDateTimeAdapter())
+            .create();
     public ApiClient(String baseUrl) {
         this.baseUrl = baseUrl;
     }
