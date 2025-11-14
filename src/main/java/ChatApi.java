@@ -48,7 +48,12 @@ public class ChatApi {
     }
 
     public void deleteChat(int chatId, User user) throws Exception {
-        client.delete("/api/chat/" + chatId, user);
+        client.delete("/api/chat/" + chatId + "/delete", Object.class);
+
+    }
+
+    public Chat getChat(int chatId) throws Exception {
+        return client.get("/api/chat/" + chatId + "/getChat", Chat.class);
     }
 
     public void sendMessage(int chatId, Message msg) throws Exception {
