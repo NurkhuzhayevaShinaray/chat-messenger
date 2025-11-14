@@ -4,38 +4,23 @@ import com.google.gson.Gson;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        Gson gson = new Gson();
-        URL url = new URL("http://10.165.177.238:5000/api/chat/login");
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        ChatApi api = new ChatApi("http://localhost:5000");
 
-        con.setRequestMethod("POST");
-        con.setRequestProperty("Content-Type", "application/json; utf-8");
-        con.setDoOutput(true);
+        // Регистрация
+        User u = new User();
+        u.setUserName("Ayawaska");
+        u.setPassword("123123");
 
-        UserDto dto = new UserDto("Blob", "1502");
-        String json = gson.toJson(dto);
-        try (OutputStream os = con.getOutputStream()) {
-            os.write(json.getBytes("utf-8"));
-        }
+        User created = api.login(u);
+        System.out.println("User ID: " + created.getUserId());
 
-        int code = con.getResponseCode();
-        if (code == HttpURLConnection.HTTP_OK) {
-            BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String line = br.readLine();
-            System.out.println("ID пользователя: " + line);
-        } else {
-            System.out.println("Ошибка: " + code);
-        }
-    }
+        // Создать чат
+        Chat chat = new Chat();
+        chat.setChatName("Chat");
+        chat.setOwnerId(created.getUserId());
 
-    static class UserDto {
-        public String Name;
-        public String Password;
-
-        public UserDto(String username, String password) {
-            this.Name = username;
-            this.Password = password;
-        }
+        Chat createdChat = api.createChat(chat);
+        System.out.println("Chat ID: " + createdChat.getChatId());
     }
 
 }

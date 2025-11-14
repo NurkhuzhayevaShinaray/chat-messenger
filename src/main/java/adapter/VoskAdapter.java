@@ -1,5 +1,5 @@
 package adapter;
 
-public class VoskAdapter implements Speech{
-
-}
+//public class VoskAdapter implements Speech{
+//
+//}
