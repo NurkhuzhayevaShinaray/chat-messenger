@@ -4,15 +4,13 @@ package Classes;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-// Основные модели
 public class Message {
     private int messageId;
     private int chatId;
     private int userId;
     private String text;
-    private LocalDateTime createdAt; // Date вместо DateTime
+    private LocalDateTime createdAt;
 
-    // Геттеры и сеттеры
     public int getMessageId() { return messageId; }
     public void setMessageId(int messageId) { this.messageId = messageId; }
 

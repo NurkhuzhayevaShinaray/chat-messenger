@@ -1,7 +1,5 @@
 import api.ChatApi;
 import Classes.*;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import strategies.ActionContext;
 import strategies.action.*;
 
@@ -11,10 +9,11 @@ import adapter.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         Scanner sc = new Scanner(System.in);
         ChatApi api = new ChatApi("http://26.125.182.80:5000"); // поменяй если нужно
+
 
         User currentUser = null;
 

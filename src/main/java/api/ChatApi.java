@@ -76,4 +76,8 @@ public class ChatApi {
     public Message[] getMessages(int chatId) throws Exception {
         return client.get("/api/chat/" + chatId + "/messages", Message[].class);
     }
+
+    public Chat[] getChatsOfUser(int userId) throws Exception {
+        return client.get("/api/chat/" + userId + "/chats", Chat[].class);
+    }
 }

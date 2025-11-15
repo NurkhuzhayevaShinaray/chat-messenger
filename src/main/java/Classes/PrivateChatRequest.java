@@ -1,6 +1,5 @@
 package Classes;
 
-// Вспомогательные DTO
 public class PrivateChatRequest {
     private int user1;
     private int user2;
