@@ -9,6 +9,7 @@ public class TranslateDecorator extends Decorator{
 
     @Override
     public Message createMessage() {
-        return null;
+
+        return message;
     }
 }
