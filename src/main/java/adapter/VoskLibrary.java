@@ -18,7 +18,7 @@ public class VoskLibrary {
     }
 
     private void handleCommand(String text) {
-        System.out.println("Speech: " + text);
+        System.out.println("Speech content: " + text);
     }
 
     public VoskLibrary(String modelPath) {
