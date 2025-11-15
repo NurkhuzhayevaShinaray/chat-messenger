@@ -1,5 +1,7 @@
 package decorator;
 
+import Classes.Message;
+
 public abstract class Decorator implements SendingTypes {
     protected SendingTypes sendingTypes;
     public int MessageId;
@@ -52,7 +54,8 @@ public abstract class Decorator implements SendingTypes {
         CreatedAt = createdAt;
     }
 
-    public void send() {
+    public Message createMessage() {
 
+        return null;
     }
 }

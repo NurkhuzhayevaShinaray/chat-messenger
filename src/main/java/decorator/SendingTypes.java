@@ -1,5 +1,6 @@
 package decorator;
+import Classes.Message;
 
 public interface SendingTypes {
-    void send();
+    Message createMessage();
 }

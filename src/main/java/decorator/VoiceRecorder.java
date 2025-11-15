@@ -1,5 +1,7 @@
 package decorator;
-
+import Classes.Message;
+import adapter.Speech;
+import adapter.VoskAdapter;
 import adapter.VoskLibrary;
 
 public class VoiceRecorder implements SendingTypes {
@@ -8,8 +10,12 @@ public class VoiceRecorder implements SendingTypes {
     public String UserName;
     public String MessageText;
     public String CreatedAt;
+    private Speech speech;
 
-    private VoskLibrary vosk = new VoskLibrary("src/main/resources/vosk-model-small-en-us-0.15");
+    private VoskLibrary vosk = new VoskLibrary("src/main/resources/vosk-model-small-en-us-0.15/vosk-model-small-en-us-0.15");
+
+    public VoiceRecorder(VoskAdapter vosk) {
+    }
 
     public int getMessageId() {
         return MessageId;
@@ -52,8 +58,9 @@ public class VoiceRecorder implements SendingTypes {
     }
 
     @Override
-    public void send() {
+    public Message createMessage() {
 
+        return null;
     }
 
     public String recording() {
