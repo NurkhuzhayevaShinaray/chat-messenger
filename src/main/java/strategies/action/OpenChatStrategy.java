@@ -58,7 +58,7 @@ public class OpenChatStrategy implements ActionStrategy {
         }
 
         for (Message m : msgs) {
-            System.out.println(m.getUserId() + ": " + m.getText());
+            System.out.println(m.getUser() + ": " + m.getText());
         }
     }
 
@@ -69,7 +69,7 @@ public class OpenChatStrategy implements ActionStrategy {
         Message m = new Message();
         m.setText(text);
         m.setChatId(chatId);
-        m.setUserId(ctx.user.getUserId());
+        m.setUser(ctx.user);
 
         ctx.api.sendMessage(chatId, m);
     }

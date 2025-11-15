@@ -14,6 +14,13 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         ChatApi api = new ChatApi("http://26.125.182.80:5000"); // поменяй если нужно
 
+        var messages = api.getMessages(13);
+        for (var message : messages) {
+            System.out.print(message.getMessageId() + " ");
+            System.out.print(message.getChatId() + " ");
+            System.out.print(message.getUser().getUserName() + " ");
+            System.out.println();
+        }
 
         User currentUser = null;
 
