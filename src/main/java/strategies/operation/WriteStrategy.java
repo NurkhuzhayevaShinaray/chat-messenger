@@ -20,7 +20,7 @@ public class WriteStrategy implements strategies.operation.OperationStrategy {
         System.out.print("Text: ");
         String t = sc.nextLine();
 
-        flow.sendMessage(chatId, acc.getCurrentUser().getUserId(), t);
+        flow.sendMessage(chatId, acc.getCurrentUser(), t);
         System.out.println("Sent!");
     }
 }

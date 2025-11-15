@@ -12,8 +12,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         Scanner sc = new Scanner(System.in);
-        ChatApi api = new ChatApi("http://26.125.182.80:5000"); // поменяй если нужно
-
+        ChatApi api = new ChatApi("http://26.125.182.80:5000");
 
         User currentUser = null;
 

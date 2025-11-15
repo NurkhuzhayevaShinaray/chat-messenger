@@ -27,10 +27,10 @@ public class FlowFacade {
         return api.joinChat(chatId, user);
     }
 
-    public void sendMessage(int chatId, int userId, String txt) throws Exception {
+    public void sendMessage(int chatId, User user, String txt) throws Exception {
         Message m = new Message();
         m.setChatId(chatId);
-        m.setUserId(userId);
+        m.setUser(user);
         m.setText(txt);
 
         api.sendMessage(chatId, m);
