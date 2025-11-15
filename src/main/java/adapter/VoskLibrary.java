@@ -4,7 +4,6 @@ import org.vosk.Model;
 import org.vosk.Recognizer;
 import org.vosk.LibVosk;
 import org.vosk.LogLevel;
-
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.LineUnavailableException;
@@ -19,7 +18,7 @@ public class VoskLibrary {
     }
 
     private void handleCommand(String text) {
-        System.out.println("Command: " + text);
+        System.out.println("Speech: " + text);
     }
 
     public VoskLibrary(String modelPath) {
@@ -62,7 +61,6 @@ public class VoskLibrary {
             return "error";
         }
 
-
-        return "no command detected";
+        return "no speech detected";
     }
 }

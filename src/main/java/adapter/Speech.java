@@ -1,5 +1,5 @@
 package adapter;
 
 public interface Speech {
-    public String recognize();
+     String recognize();
 }
