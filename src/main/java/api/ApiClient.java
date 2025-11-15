@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class ApiClient {
     private final String baseUrl;
     private final Gson gson = new GsonBuilder()
-            .registerTypeAdapter(LocalDateTime.class, new utils.LocalDateTimeAdapter())
+            .registerTypeAdapter(LocalDateTime.class, new adapter.LocalDateTimeAdapter())
             .create();
     public ApiClient(String baseUrl) {
         this.baseUrl = baseUrl;

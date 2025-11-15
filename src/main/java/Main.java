@@ -14,6 +14,9 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         ChatApi api = new ChatApi("http://26.125.182.80:5000");
 
+        VoskLibrary vosk = new VoskLibrary("src/main/resources/vosk-model-small-en-us-0.15");
+
+        System.out.println(vosk.recognize());
         User currentUser = null;
 
         while (currentUser == null) {
