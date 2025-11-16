@@ -22,15 +22,12 @@ public class ChatApi {
 
     // ---------------- Чаты ----------------
 
-    public int createPrivateChat(int u1, int u2) throws Exception {
-        PrivateChatRequest req = new PrivateChatRequest();
-        req.setUser1(u1);
-        req.setUser2(u2);
-        return client.post("/api/chat/private/create", req, Integer.class);
-    }
-
     public Chat createChat(Chat chat) throws Exception {
         return client.post("/api/chat/create", chat, Chat.class);
+    }
+
+    public Chat createChat(Chat chat , int user2Id) throws Exception {
+        return client.post("/api/chat/createprivate/" + user2Id, chat, Chat.class);
     }
 
     public Chat joinChat(int chatId, User user) throws Exception {

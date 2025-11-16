@@ -1,5 +1,8 @@
 package factory;
 
+import Classes.Chat;
+
 public interface ChatFactory {
-    ChatType createChatType();
+    Chat createChat(String chatName, int ownerId);
+
 }

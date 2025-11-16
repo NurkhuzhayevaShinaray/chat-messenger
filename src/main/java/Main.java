@@ -1,5 +1,7 @@
 import api.ChatApi;
 import Classes.*;
+import factory.ChatFactory;
+import factory.PrivateChatFactory;
 import strategies.ActionContext;
 import strategies.action.*;
 
@@ -40,11 +42,9 @@ public class Main {
         System.out.println("\nWelcome, " + currentUser.getUserName());
 
         ActionContext context = new ActionContext(api, currentUser, sc);
-        Message message = new Message();
-        message.setUser(currentUser);
-        message.setText("TExt");
 
-        api.sendMessage(14 , message);
+        ChatFactory privateChatFactory = new PrivateChatFactory();
+        System.out.println(context.api.createChat(privateChatFactory.createChat("" , 23) , 22).getChatName());
 
         while (true) {
             System.out.println("\n====== MENU ======");
