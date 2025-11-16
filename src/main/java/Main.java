@@ -2,16 +2,17 @@ import api.ChatApi;
 import Classes.*;
 import strategies.ActionContext;
 import strategies.action.*;
-
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
+
         ChatApi api = new ChatApi("http://26.125.182.80:5000");
         User currentUser = null;
 
+        System.out.println("Welcome to messenger!");
         while (currentUser == null) {
             System.out.println("1) Register\n2) Login");
             String c = sc.nextLine();

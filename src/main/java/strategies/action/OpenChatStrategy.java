@@ -4,7 +4,6 @@ import Classes.Chat;
 import Classes.Message;
 import Classes.User;
 import strategies.ActionContext;
-
 import java.util.Arrays;
 
 public class OpenChatStrategy implements ActionStrategy {
@@ -189,9 +188,9 @@ public class OpenChatStrategy implements ActionStrategy {
 
         for (Message m : msgs) {
             String messageId = "[" + m.getMessageId() + "]";
-            String formattedDate = m.getFormattedDate() != null ? m.getFormattedDate() : "unknown date";
-            String userName = m.getUser() != null ? m.getUser().getUserName() : "Unknown";
-            String text = m.getText() != null ? m.getText() : "";
+            String formattedDate = m.getFormattedDate();
+            String userName = m.getUser().getUserName();
+            String text = m.getText();
 
             System.out.println(messageId + " (" + formattedDate + ") " + userName + ": " + text);
         }

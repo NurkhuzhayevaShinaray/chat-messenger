@@ -21,7 +21,6 @@ public class Message {
         ExpiringTime = expiringTime;
     }
 
-
     public int getMessageId() {
         return messageId;
     }

@@ -9,16 +9,12 @@ public class ChatApi {
     public ChatApi(String baseUrl) {
         client = new ApiClient(baseUrl);
     }
-
     public int getCurrentChatId() {
         return currentChatId;
     }
-
     public void setCurrentChatId(int currentChatId) {
         this.currentChatId = currentChatId;
     }
-
-    // ---------------- Пользователи ----------------
     public User register(User user) throws Exception {
         return client.post("/api/chat/register", user, User.class);
     }
@@ -26,21 +22,16 @@ public class ChatApi {
     public User login(User user) throws Exception {
         return client.post("/api/chat/login", user, User.class);
     }
-
-    // ---------------- Чаты ----------------
     public Chat createChat(Chat chat) throws Exception {
         return client.post("/api/chat/create", chat, Chat.class);
     }
-
     public Chat createChat(Chat chat, int user2Id) throws Exception {
         return client.post("/api/chat/createprivate/" + user2Id, chat, Chat.class);
     }
-
     public Chat joinChat(int chatId, User user) throws Exception {
-        this.currentChatId = chatId; // Устанавливаем текущий чат
+        this.currentChatId = chatId;
         return client.post("/api/chat/" + chatId + "/join", user, Chat.class);
     }
-
     public void addUserToGroup(int chatId, int owner, int newUser) throws Exception {
         AddUserRequest req = new AddUserRequest();
         req.setOwner(owner);
@@ -51,7 +42,6 @@ public class ChatApi {
     public void leaveChat(int chatId, User user) throws Exception {
         client.post("/api/chat/" + chatId + "/leave", user, Object.class);
     }
-
     public void clearChat(int chatId, User user) throws Exception {
         client.post("/api/chat/" + chatId + "/clear", user, Object.class);
     }
@@ -59,13 +49,10 @@ public class ChatApi {
     public void deleteChat(int chatId, User user) throws Exception {
         client.delete("/api/chat/" + chatId + "/deleteChat" , user);
     }
-
     public Chat getChat(int chatId) throws Exception {
-        this.currentChatId = chatId; // Устанавливаем текущий чат
+        this.currentChatId = chatId;
         return client.get("/api/chat/" + chatId + "/getChat", Chat.class);
     }
-
-    // ИСПРАВЛЕННЫЙ МЕТОД - теперь принимает Message вместо int chatId
     public void sendMessage(Message msg) throws Exception {
         client.post("/api/chat/" + msg.getChatId() + "/send", msg, Object.class);
     }

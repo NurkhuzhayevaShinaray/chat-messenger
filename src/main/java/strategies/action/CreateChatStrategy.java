@@ -1,5 +1,4 @@
 package strategies.action;
-
 import Classes.Chat;
 import Classes.User;
 import factory.*;
@@ -30,7 +29,6 @@ public class CreateChatStrategy implements ActionStrategy {
 
                     factory = new PrivateChatFactory();
                     chat = factory.createChat(name, ctx.user.getUserId());
-
 
                     Chat createdPrivate = ctx.api.createChat(chat, secondUserId);
                     System.out.println("Private chat created! ID = " + createdPrivate.getChatId());

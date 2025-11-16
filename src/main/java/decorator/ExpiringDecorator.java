@@ -2,50 +2,37 @@ package decorator;
 import Classes.Message;
 import Classes.MessageType;
 
-import java.time.LocalDateTime;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Date;
 
-public class ExpiringDecorator extends Decorator {
+public class ExpiringDecorator extends Decorator{
     public ExpiringDecorator(SendingTypes sendingTypes){
         super(sendingTypes);
     }
 
+    Timer timer = new Timer();
     @Override
     public Message createMessage() {
         Message message = super.createMessage();
         message.setType(MessageType.EXPIRING);
-
-
-        if (message.getCreatedAt() == null) {
-            message.setCreatedAt(LocalDateTime.now());
-        }
-
-
-        startExpirationTimer(message);
-
-        return message;
-    }
-
-    private void startExpirationTimer(Message message) {
-        Timer timer = new Timer();
-        final int expirationSeconds = 10; // Сообщение исчезает через 10 секунд
-        message.setExpiringTime(expirationSeconds);
+        message.setExpiringTime(5);
         TimerTask task = new TimerTask() {
-            int secondsLeft = expirationSeconds;
-
+            int sec = 5;
             @Override
             public void run() {
-                if (secondsLeft > 0) {
-                    System.out.println("💬 Expiring message will disappear in " + secondsLeft + " seconds");
-                    secondsLeft--;
+                if (sec>0){
+                    System.out.println("Message expires in " + sec +" seconds" );
+                    sec--;
                 } else {
-                    System.out.println("💬 Message expired and disappeared!");
+                    System.out.println("Message expired in: " + new Date());
                     timer.cancel();
+                    timer.purge();
                 }
             }
         };
+        timer.scheduleAtFixedRate(task,0,1000);
 
-        timer.scheduleAtFixedRate(task, 0, 1000);
+        return message;
     }
 }
