@@ -23,4 +23,6 @@ public class TextMessage implements SendingTypes{
         message.setText(text);
         return message;
     }
+
+
 }
