@@ -13,10 +13,10 @@ public class JoinChatStrategy implements ActionStrategy {
 
             Chat joined = ctx.api.joinChat(id, ctx.user);
 
-            System.out.println("✔ Joined chat: " + joined.getChatName());
+            System.out.println(" Joined chat: " + joined.getChatName());
 
         } catch (Exception e) {
-            System.out.println("❌ Cannot join: " + e.getMessage());
+            System.out.println(" Cannot join: " + e.getMessage());
         }
     }
 }

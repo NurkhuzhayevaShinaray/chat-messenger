@@ -2,16 +2,23 @@ package api;
 
 import Classes.*;
 
-
 public class ChatApi {
     private final ApiClient client;
+    private int currentChatId;
 
     public ChatApi(String baseUrl) {
         client = new ApiClient(baseUrl);
     }
 
-    // ---------------- Пользователи ----------------
+    public int getCurrentChatId() {
+        return currentChatId;
+    }
 
+    public void setCurrentChatId(int currentChatId) {
+        this.currentChatId = currentChatId;
+    }
+
+    // ---------------- Пользователи ----------------
     public User register(User user) throws Exception {
         return client.post("/api/chat/register", user, User.class);
     }
@@ -21,16 +28,16 @@ public class ChatApi {
     }
 
     // ---------------- Чаты ----------------
-
     public Chat createChat(Chat chat) throws Exception {
         return client.post("/api/chat/create", chat, Chat.class);
     }
 
-    public Chat createChat(Chat chat , int user2Id) throws Exception {
+    public Chat createChat(Chat chat, int user2Id) throws Exception {
         return client.post("/api/chat/createprivate/" + user2Id, chat, Chat.class);
     }
 
     public Chat joinChat(int chatId, User user) throws Exception {
+        this.currentChatId = chatId; // Устанавливаем текущий чат
         return client.post("/api/chat/" + chatId + "/join", user, Chat.class);
     }
 
@@ -50,16 +57,17 @@ public class ChatApi {
     }
 
     public void deleteChat(int chatId, User user) throws Exception {
-        client.delete("/api/chat/" + chatId + "/delete", Object.class);
-
+        client.delete("/api/chat/" + chatId + "/deleteChat" , user);
     }
 
     public Chat getChat(int chatId) throws Exception {
+        this.currentChatId = chatId; // Устанавливаем текущий чат
         return client.get("/api/chat/" + chatId + "/getChat", Chat.class);
     }
 
-    public void sendMessage(int chatId, Message msg) throws Exception {
-        client.post("/api/chat/" + chatId + "/send", msg, Object.class);
+    // ИСПРАВЛЕННЫЙ МЕТОД - теперь принимает Message вместо int chatId
+    public void sendMessage(Message msg) throws Exception {
+        client.post("/api/chat/" + msg.getChatId() + "/send", msg, Object.class);
     }
 
     public void deleteMessage(int chatId, int msgId, User user) throws Exception {

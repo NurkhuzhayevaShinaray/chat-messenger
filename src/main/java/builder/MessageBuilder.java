@@ -1,6 +1,7 @@
 package builder;
 
 import Classes.Message;
+import Classes.MessageType;
 import Classes.User;
 
 public class MessageBuilder implements IMessageBuilder{
@@ -22,6 +23,12 @@ public class MessageBuilder implements IMessageBuilder{
     @Override
     public IMessageBuilder addUser(User user) {
         message.setUser(user);
+        return this;
+    }
+
+    @Override
+    public IMessageBuilder addType(MessageType type) {
+        message.setType(type);
         return this;
     }
 

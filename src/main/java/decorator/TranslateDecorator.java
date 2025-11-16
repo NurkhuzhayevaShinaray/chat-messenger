@@ -1,5 +1,7 @@
 package decorator;
 import Classes.Message;
+import Classes.MessageType;
+
 import java.util.Scanner;
 
 public class TranslateDecorator extends Decorator{
@@ -18,12 +20,13 @@ public class TranslateDecorator extends Decorator{
         System.out.println("3.English");
         String choice = sc.nextLine();
         String translated = switch (choice){
-            case "1" -> "Message was translated to Kazakh";
-            case "2" -> "Message was translated to Russian";
-            case "3" -> "Message was translated to English";
+            case "1" -> text + " was translated to Kazakh";
+            case "2" -> text + " was translated to Russian";
+            case "3" -> text + " was translated to English";
             default -> text;
         };
         message.setText(translated);
+        message.setType(MessageType.TRANSLATED);
         return message;
     }
 }

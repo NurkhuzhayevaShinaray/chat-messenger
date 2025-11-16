@@ -1,26 +1,15 @@
 import api.ChatApi;
 import Classes.*;
-import factory.ChatFactory;
-import factory.PrivateChatFactory;
 import strategies.ActionContext;
 import strategies.action.*;
 
-import java.time.LocalDateTime;
 import java.util.Scanner;
-import adapter.*;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-
         Scanner sc = new Scanner(System.in);
         ChatApi api = new ChatApi("http://26.125.182.80:5000");
-
-
-
-
-
-
         User currentUser = null;
 
         while (currentUser == null) {
@@ -43,11 +32,8 @@ public class Main {
 
         ActionContext context = new ActionContext(api, currentUser, sc);
 
-        ChatFactory privateChatFactory = new PrivateChatFactory();
-        System.out.println(context.api.createChat(privateChatFactory.createChat("" , 23) , 22).getChatName());
-
         while (true) {
-            System.out.println("\n====== MENU ======");
+            System.out.println("MENU");
             System.out.println("1) Create Chat");
             System.out.println("2) Join Chat");
             System.out.println("3) Open Chat");
@@ -55,29 +41,34 @@ public class Main {
 
             String c = sc.nextLine();
 
+            ActionStrategy strategy;
+
             switch (c) {
                 case "1":
-                    context.setStrategy(new CreateChatStrategy());
+                    strategy = new CreateChatStrategy();
                     break;
                 case "2":
-                    context.setStrategy(new JoinChatStrategy());
+                    strategy = new JoinChatStrategy();
                     break;
                 case "3":
-                    context.setStrategy(new OpenChatStrategy());
+                    strategy = new OpenChatStrategy();
                     break;
                 case "4":
                     System.out.println("Bye!");
                     return;
                 default:
                     System.out.println("Invalid option");
-                    continue;
+                    strategy = null;
+                    break;
             }
 
-            context.execute();
+            if (strategy != null) {
+                context.setStrategy(strategy);
+                context.execute();
+            }
         }
     }
 
-    // ---------- REGISTRATION ----------
     public static User register(Scanner sc, ChatApi api) {
         while (true) {
             try {
@@ -91,11 +82,11 @@ public class Main {
                 User result = api.register(u);
 
                 if (result.getUserId() == -1) {
-                    System.out.println("❌ Username already exists. Try again.");
+                    System.out.println("Username already exists. Try again.");
                     continue;
                 }
 
-                System.out.println("✔ Registered successfully!");
+                System.out.println("Registered successfully!");
                 return result;
 
             } catch (Exception e) {
@@ -104,7 +95,6 @@ public class Main {
         }
     }
 
-    // ---------- LOGIN ----------
     public static User login(Scanner sc, ChatApi api) {
         while (true) {
             try {
@@ -118,11 +108,11 @@ public class Main {
                 User result = api.login(u);
 
                 if (result.getUserId() == -1) {
-                    System.out.println("❌ Wrong username or password.");
+                    System.out.println(" Wrong username or password.");
                     continue;
                 }
 
-                System.out.println("✔ Logged in!");
+                System.out.println(" Logged in!");
                 return result;
 
             } catch (Exception e) {

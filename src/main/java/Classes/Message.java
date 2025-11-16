@@ -1,4 +1,6 @@
 package Classes;
+import visitor.MessageVisitor;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -56,6 +58,24 @@ public class Message {
     public String getFormattedDate() {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
         return createdAt.format(fmt);
+    }
+
+    private MessageType type;
+
+    public MessageType getType() {
+        return type;
+    }
+    public void setType(MessageType type) {
+        this.type = type;
+    }
+
+    public void accept(MessageVisitor visitor) {
+        switch (type) {
+            case TEXT -> visitor.visitText(this);
+            case VOICE -> visitor.visitVoice(this);
+            case TRANSLATED -> visitor.visitTranslated(this);
+            case EXPIRING -> visitor.visitExpiring(this);
+        }
     }
 
 }

@@ -8,11 +8,13 @@ public class UserBuilder implements IUserBuilder {
 
     @Override
     public IUserBuilder addName(String name) {
+        user.setUserName(name);
         return this;
     }
 
     @Override
     public IUserBuilder addPassword(String password) {
+        user.setPassword(password);
         return this;
     }
 

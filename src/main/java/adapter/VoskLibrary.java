@@ -1,5 +1,8 @@
 package adapter;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.vosk.Model;
 import org.vosk.Recognizer;
 import org.vosk.LibVosk;
@@ -46,8 +49,12 @@ public class VoskLibrary {
                 int bytesRead = mic.read(buffer, 0, buffer.length);
                 if (recognizer.acceptWaveForm(buffer, bytesRead)) {
                     finalText = recognizer.getResult().trim();
-                    handleCommand(finalText);
-                    return finalText;
+
+                    JsonObject jsonObject = JsonParser.parseString(finalText).getAsJsonObject();
+                    String extractedText = jsonObject.get("text").getAsString();
+
+                    handleCommand(extractedText);
+                    return extractedText;
                 }
             }
 
