@@ -14,9 +14,11 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         ChatApi api = new ChatApi("http://26.125.182.80:5000");
 
-        VoskLibrary vosk = new VoskLibrary("src/main/resources/vosk-model-small-en-us-0.15");
 
-        System.out.println(vosk.recognize());
+
+
+
+
         User currentUser = null;
 
         while (currentUser == null) {
@@ -38,6 +40,11 @@ public class Main {
         System.out.println("\nWelcome, " + currentUser.getUserName());
 
         ActionContext context = new ActionContext(api, currentUser, sc);
+        Message message = new Message();
+        message.setUser(currentUser);
+        message.setText("TExt");
+
+        api.sendMessage(14 , message);
 
         while (true) {
             System.out.println("\n====== MENU ======");

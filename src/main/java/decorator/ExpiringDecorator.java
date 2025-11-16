@@ -21,6 +21,7 @@ public class ExpiringDecorator extends Decorator{
                     sec--;
                 } else {
                     System.out.println("Message expired in: " + new Date());
+                    message.setExpiringTime(5);
                     message.setText("Message expired!");
                 }
             }
