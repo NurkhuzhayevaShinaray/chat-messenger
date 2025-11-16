@@ -2,6 +2,8 @@ import api.ChatApi;
 import Classes.*;
 import strategies.ActionContext;
 import strategies.action.*;
+
+import java.io.Console;
 import java.util.Scanner;
 
 public class Main {
@@ -9,7 +11,12 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
 
-        ChatApi api = new ChatApi("http://26.125.182.80:5000");
+        System.out.println("Enter the ip:port (default:26.125.182.80:5000)");
+        String address = sc.nextLine();
+        if(address.isEmpty()) address = "26.125.182.80:5000";
+
+        ChatApi api = new ChatApi("http://" + address);
+
         User currentUser = null;
 
         System.out.println("Welcome to messenger!");
