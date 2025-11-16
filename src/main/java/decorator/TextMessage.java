@@ -28,4 +28,6 @@ public class TextMessage implements SendingTypes{
         message.setCreatedAt(LocalDateTime.now());
         return message;
     }
+
+
 }
